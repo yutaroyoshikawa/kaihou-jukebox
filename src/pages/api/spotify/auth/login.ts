@@ -2,7 +2,7 @@ import crypto from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.BASE_URL ?? process.env.VERCEL_URL;
 const SPOTIFY_REDIRECT_URI = `${BASE_URL}/api/spotify/auth/callback`;
 
 const spotifyAuthScopes = [
