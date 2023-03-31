@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FC } from "react";
 import { FiPlayCircle } from "react-icons/fi";
 import { css } from "../../style";
@@ -9,34 +10,32 @@ type PlaylistTrackListProps = {
 	onRequestPlayTrack: (trackId: string) => void;
 };
 
-export const PlaylistTrackList: FC<PlaylistTrackListProps> = ({
-	tracks,
-	selectTrackId,
-	onRequestPlayTrack,
-}) => {
+export const PlaylistTrackList: FC<PlaylistTrackListProps> = (
+	{ tracks, selectTrackId, onRequestPlayTrack },
+) => {
 	return (
 		<ul className={listStyle()}>
-			{tracks.map((track) => (
-				<li key={track.id} className={listItemStyle()}>
-					<button
-						className={buttonStyle()}
-						type="button"
-						onClick={() => onRequestPlayTrack(track.id)}
-					>
-						<span className={playIconStyle()}>
-							<FiPlayCircle />
-						</span>
-						<img
-							className={albumImageStyle()}
-							src={track.album.images[0]?.url ?? ""}
-							width={track.album.images[0]?.width}
-							height={track.album.images[0]?.height}
-							alt=""
-						/>
-						<span>{track.name}</span>
-					</button>
-				</li>
-			))}
+			{tracks.map(
+				(track) => (
+					<li key={track.id} className={listItemStyle()}>
+						<button
+							className={buttonStyle()}
+							type="button"
+							onClick={() => onRequestPlayTrack(track.id)}
+						>
+							<span className={playIconStyle()}><FiPlayCircle /></span>
+							<Image
+								className={albumImageStyle()}
+								src={track.album.images[0]?.url ?? ""}
+								width={track.album.images[0]?.width}
+								height={track.album.images[0]?.height}
+								alt=""
+							/>
+							<span>{track.name}</span>
+						</button>
+					</li>
+				),
+			)}
 		</ul>
 	);
 };

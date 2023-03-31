@@ -3,6 +3,7 @@ import SwiperCore, { EffectCoverflow, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Playlist } from "./playlistHooks";
 
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
@@ -19,13 +20,9 @@ type PlaylistTracksCoverflowProps = {
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
-export const PlaylistTracksCoverflow: FC<PlaylistTracksCoverflowProps> = ({
-	tracks,
-	selectTrackId,
-	onChangeSelectTrack,
-	onRequestPlayTrack,
-	width,
-}) => {
+export const PlaylistTracksCoverflow: FC<PlaylistTracksCoverflowProps> = (
+	{ tracks, selectTrackId, onChangeSelectTrack, onRequestPlayTrack, width },
+) => {
 	const selectTrackIndex = useMemo(() => {
 		const index = tracks.findIndex((track) => track.id === selectTrackId);
 
@@ -46,34 +43,35 @@ export const PlaylistTracksCoverflow: FC<PlaylistTracksCoverflowProps> = ({
 			}}
 			initialSlide={selectTrackIndex}
 			onSlideChange={(event) =>
-				onChangeSelectTrack(tracks[event.activeIndex]?.id ?? "")
-			}
+				onChangeSelectTrack(tracks[event.activeIndex]?.id ?? "")}
 			slidesPerView={3}
 			centeredSlides
 			loop
 			style={{ width: `${width}px` }}
 		>
-			{tracks.map((track) => (
-				<SwiperSlide key={track.id}>
-					<button
-						type="button"
-						className={coverItemContainerStyle()}
-						onClick={() => onRequestPlayTrack(track.id)}
-					>
-						<span className={trackNameStyle()}>{track.name}</span>
-						{track.album.images[0] && (
-							<img
-								src={track.album.images[0].url}
-								width={track.album.images[0].width}
-								height={track.album.images[0].height}
-								alt=""
-								className={albumImageStyle()}
-							/>
-						)}
-						<span className={trackNameStyle()}>選択して再生</span>
-					</button>
-				</SwiperSlide>
-			))}
+			{tracks.map(
+				(track) => (
+					<SwiperSlide key={track.id}>
+						<button
+							type="button"
+							className={coverItemContainerStyle()}
+							onClick={() => onRequestPlayTrack(track.id)}
+						>
+							<span className={trackNameStyle()}>{track.name}</span>
+							{track.album.images[0] && (
+								<Image
+									src={track.album.images[0].url}
+									width={track.album.images[0].width}
+									height={track.album.images[0].height}
+									alt=""
+									className={albumImageStyle()}
+								/>
+							)}
+							<span className={trackNameStyle()}>選択して再生</span>
+						</button>
+					</SwiperSlide>
+				),
+			)}
 		</Swiper>
 	);
 };

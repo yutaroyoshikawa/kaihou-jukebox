@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import { css, globalStyle } from "../../style";
 import { useSpotifyAuth } from "../spotify/authState";
@@ -19,7 +20,7 @@ export const JukeBoxSpotifyApp: FC = () => {
 	const [authState] = useSpotifyAuth();
 
 	if (!authState?.accessToken) {
-		return <a href="/api/spotify/auth/login">Login with Spotify</a>;
+		return <Link href="/api/spotify/auth/login">Login with Spotify</Link>;
 	}
 
 	return <SpotifyApp />;

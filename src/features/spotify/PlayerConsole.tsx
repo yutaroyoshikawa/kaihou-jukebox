@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FC } from "react";
 import { AiOutlinePauseCircle } from "react-icons/ai";
 import { FiPlayCircle } from "react-icons/fi";
@@ -75,7 +76,7 @@ export const PlayerConsole: FC = () => {
 			</div>
 			<p className={playingTrackContainerStyle()}>
 				<span className={playingTrackLabelStyle()}>再生中の曲</span>
-				<img
+				<Image
 					className={playingTrackImageStyle()}
 					src={playbackState.data.item?.album.images[0]?.url}
 					width={playbackState.data.item?.album.images[0]?.width}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FC, useState } from "react";
 import { FiSettings } from "react-icons/fi";
 import { css } from "../../style";
@@ -43,7 +44,7 @@ export const SpotifySideMenu: FC = () => {
 								>
 									{playlist.images[0] && (
 										<span>
-											<img
+											<Image
 												src={playlist.images[0].url}
 												width={playlist.images[0].width}
 												height={playlist.images[0].height}
