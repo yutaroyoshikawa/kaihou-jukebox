@@ -32,7 +32,7 @@ export const SpotifySideMenu: FC = () => {
 			{(playlist.data?.items ?? []).length > 0 && (
 				<ul className={listStyle()}>
 					{playlist.data?.items?.filter(
-						(item) => item.name.startsWith("【プレイリスト】"),
+						(item) => item.name.startsWith("*"),
 					).map(
 						(playlist) => (
 							<li key={playlist.id} className={listItemStyle()}>
