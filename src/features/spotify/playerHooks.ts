@@ -10,21 +10,21 @@ import {
 
 type StartSpotifyPlayerState =
 	| {
-			status: "initial";
-			error: undefined;
-	  }
+		status: "initial";
+		error: undefined;
+	}
 	| {
-			status: "loading";
-			error?: Error;
-	  }
+		status: "loading";
+		error?: Error;
+	}
 	| {
-			status: "success";
-			error: undefined;
-	  }
+		status: "success";
+		error: undefined;
+	}
 	| {
-			status: "failed";
-			error: Error;
-	  };
+		status: "failed";
+		error: Error;
+	};
 
 export const useStartSpotifyPlayer = () => {
 	const [startSpotifyPlayerStatus, setStartSpotifyPlayerStatus] =
@@ -36,20 +36,24 @@ export const useStartSpotifyPlayer = () => {
 	const [authState] = useSpotifyAuth();
 
 	const putStartSpotifyPlayer = useCallback(
-		async (queries: {
-			context_uri: string;
-			uris?: string[];
-			offset?: { position?: number; uri?: string };
-			position_ms: number;
-		}) => {
+		async (
+			queries: {
+				context_uri: string;
+				uris?: string[];
+				offset?: { position?: number; uri?: string };
+				position_ms: number;
+			},
+		) => {
 			if (typeof authState?.accessToken === "undefined" || !selectDevice) {
 				return;
 			}
 
-			setStartSpotifyPlayerStatus((prev) => ({
-				...prev,
-				status: "loading",
-			}));
+			setStartSpotifyPlayerStatus(
+				(prev) => ({
+					...prev,
+					status: "loading",
+				}),
+			);
 
 			const fetchOptions = makeSpotifyApiFetchOptions(authState.accessToken);
 
@@ -73,9 +77,11 @@ export const useStartSpotifyPlayer = () => {
 			}
 
 			const res = await fetch(
-				`${SPOTIFY_API_BASE_URL}/v1/me/player/play?${new URLSearchParams({
-					device_id: selectDevice.id,
-				})}`,
+				`${SPOTIFY_API_BASE_URL}/v1/me/player/play?${
+					new URLSearchParams({
+						device_id: selectDevice.id,
+					})
+				}`,
 				{
 					...fetchOptions,
 					method: "PUT",
@@ -104,21 +110,21 @@ export const useStartSpotifyPlayer = () => {
 
 type PauseSpotifyPlayerState =
 	| {
-			status: "initial";
-			error: undefined;
-	  }
+		status: "initial";
+		error: undefined;
+	}
 	| {
-			status: "loading";
-			error?: Error;
-	  }
+		status: "loading";
+		error?: Error;
+	}
 	| {
-			status: "success";
-			error: undefined;
-	  }
+		status: "success";
+		error: undefined;
+	}
 	| {
-			status: "failed";
-			error: Error;
-	  };
+		status: "failed";
+		error: Error;
+	};
 
 export const usePauseSpotifyPlayer = () => {
 	const [pauseSpotifyPlayerStatus, setPauseSpotifyPlayerStatus] =
@@ -134,17 +140,21 @@ export const usePauseSpotifyPlayer = () => {
 			return;
 		}
 
-		setPauseSpotifyPlayerStatus((prev) => ({
-			...prev,
-			status: "loading",
-		}));
+		setPauseSpotifyPlayerStatus(
+			(prev) => ({
+				...prev,
+				status: "loading",
+			}),
+		);
 
 		const fetchOptions = makeSpotifyApiFetchOptions(authState.accessToken);
 
 		const res = await fetch(
-			`${SPOTIFY_API_BASE_URL}/v1/me/player/pause?${new URLSearchParams({
-				device_id: selectDevice.id,
-			})}`,
+			`${SPOTIFY_API_BASE_URL}/v1/me/player/pause?${
+				new URLSearchParams({
+					device_id: selectDevice.id,
+				})
+			}`,
 			{
 				...fetchOptions,
 				method: "PUT",
@@ -170,21 +180,21 @@ export const usePauseSpotifyPlayer = () => {
 
 type SkipToNextSpotifyPlayerState =
 	| {
-			status: "initial";
-			error: undefined;
-	  }
+		status: "initial";
+		error: undefined;
+	}
 	| {
-			status: "loading";
-			error?: Error;
-	  }
+		status: "loading";
+		error?: Error;
+	}
 	| {
-			status: "success";
-			error: undefined;
-	  }
+		status: "success";
+		error: undefined;
+	}
 	| {
-			status: "failed";
-			error: Error;
-	  };
+		status: "failed";
+		error: Error;
+	};
 
 export const useSkipToNextSpotifyPlayer = () => {
 	const [skipToNextSpotifyPlayerStatus, setSkipToNextSpotifyPlayerStatus] =
@@ -200,17 +210,21 @@ export const useSkipToNextSpotifyPlayer = () => {
 			return;
 		}
 
-		setSkipToNextSpotifyPlayerStatus((prev) => ({
-			...prev,
-			status: "loading",
-		}));
+		setSkipToNextSpotifyPlayerStatus(
+			(prev) => ({
+				...prev,
+				status: "loading",
+			}),
+		);
 
 		const fetchOptions = makeSpotifyApiFetchOptions(authState.accessToken);
 
 		const res = await fetch(
-			`${SPOTIFY_API_BASE_URL}/v1/me/player/next?${new URLSearchParams({
-				device_id: selectDevice.id,
-			})}`,
+			`${SPOTIFY_API_BASE_URL}/v1/me/player/next?${
+				new URLSearchParams({
+					device_id: selectDevice.id,
+				})
+			}`,
 			{
 				...fetchOptions,
 				method: "POST",
@@ -236,21 +250,21 @@ export const useSkipToNextSpotifyPlayer = () => {
 
 type SkipToPreviousSpotifyPlayerState =
 	| {
-			status: "initial";
-			error: undefined;
-	  }
+		status: "initial";
+		error: undefined;
+	}
 	| {
-			status: "loading";
-			error?: Error;
-	  }
+		status: "loading";
+		error?: Error;
+	}
 	| {
-			status: "success";
-			error: undefined;
-	  }
+		status: "success";
+		error: undefined;
+	}
 	| {
-			status: "failed";
-			error: Error;
-	  };
+		status: "failed";
+		error: Error;
+	};
 
 export const useSkipToPreviousSpotifyPlayer = () => {
 	const [
@@ -268,17 +282,21 @@ export const useSkipToPreviousSpotifyPlayer = () => {
 			return;
 		}
 
-		setSkipToPreviousSpotifyPlayerStatus((prev) => ({
-			...prev,
-			status: "loading",
-		}));
+		setSkipToPreviousSpotifyPlayerStatus(
+			(prev) => ({
+				...prev,
+				status: "loading",
+			}),
+		);
 
 		const fetchOptions = makeSpotifyApiFetchOptions(authState.accessToken);
 
 		const res = await fetch(
-			`${SPOTIFY_API_BASE_URL}/v1/me/player/previous?${new URLSearchParams({
-				device_id: selectDevice.id,
-			})}`,
+			`${SPOTIFY_API_BASE_URL}/v1/me/player/previous?${
+				new URLSearchParams({
+					device_id: selectDevice.id,
+				})
+			}`,
 			{
 				...fetchOptions,
 				method: "POST",
@@ -307,21 +325,21 @@ export const useSkipToPreviousSpotifyPlayer = () => {
 
 type SetRepeatModePlayerState =
 	| {
-			status: "initial";
-			error: undefined;
-	  }
+		status: "initial";
+		error: undefined;
+	}
 	| {
-			status: "loading";
-			error?: Error;
-	  }
+		status: "loading";
+		error?: Error;
+	}
 	| {
-			status: "success";
-			error: undefined;
-	  }
+		status: "success";
+		error: undefined;
+	}
 	| {
-			status: "failed";
-			error: Error;
-	  };
+		status: "failed";
+		error: Error;
+	};
 
 export const useSetRepeatModeSpotifyPlayer = () => {
 	const [repeatModeSpotifyPlayerStatus, setRepeatModeSpotifyPlayerStatus] =
@@ -338,18 +356,22 @@ export const useSetRepeatModeSpotifyPlayer = () => {
 				return;
 			}
 
-			setRepeatModeSpotifyPlayerStatus((prev) => ({
-				...prev,
-				status: "loading",
-			}));
+			setRepeatModeSpotifyPlayerStatus(
+				(prev) => ({
+					...prev,
+					status: "loading",
+				}),
+			);
 
 			const fetchOptions = makeSpotifyApiFetchOptions(authState.accessToken);
 
 			const res = await fetch(
-				`${SPOTIFY_API_BASE_URL}/v1/me/player/repeat?${new URLSearchParams({
-					device_id: selectDevice.id,
-					state,
-				})}`,
+				`${SPOTIFY_API_BASE_URL}/v1/me/player/repeat?${
+					new URLSearchParams({
+						device_id: selectDevice.id,
+						state,
+					})
+				}`,
 				{
 					...fetchOptions,
 					method: "PUT",
@@ -384,6 +406,7 @@ export const usePlayBgm = () => {
 	const playbackState = usePlaybackState();
 	const [, putRepeatMode] = useSetRepeatModeSpotifyPlayer();
 	const [playableBgm] = useSpotifyPlayBgmPlaylist();
+	const [, putShuffle] = useShuffleSpotifyPlayer();
 
 	useEffect(() => {
 		if (
@@ -394,6 +417,7 @@ export const usePlayBgm = () => {
 			!playableBgm
 		) {
 			putRepeatMode("off");
+			putShuffle(true);
 			return;
 		}
 
@@ -406,6 +430,7 @@ export const usePlayBgm = () => {
 				position_ms: 0,
 			});
 			await putRepeatMode("context");
+			await putShuffle(false);
 		};
 
 		const timer = setTimeout(playBgm, 15 * 1000);
@@ -413,5 +438,86 @@ export const usePlayBgm = () => {
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [selectBgmPlaylist, selectBgmPlaylist, playbackState.data, playableBgm]);
+	}, [
+		selectBgmPlaylist,
+		playbackState.data,
+		playableBgm,
+		putRepeatMode,
+		putShuffle,
+		play,
+	]);
+};
+
+type ShuffleSpotifyPlayerState =
+	| {
+		status: "initial";
+		error: undefined;
+	}
+	| {
+		status: "loading";
+		error?: Error;
+	}
+	| {
+		status: "success";
+		error: undefined;
+	}
+	| {
+		status: "failed";
+		error: Error;
+	};
+
+export const useShuffleSpotifyPlayer = () => {
+	const [shuffleSpotifyPlayerStatus, setShuffleSpotifyPlayerStatus] =
+		useState<ShuffleSpotifyPlayerState>({
+			status: "initial",
+			error: undefined,
+		});
+	const [selectDevice] = useSpotifySelectDevice();
+	const [authState] = useSpotifyAuth();
+
+	const putShuffleSpotifyPlayer = useCallback(
+		async (state: boolean) => {
+			if (typeof authState?.accessToken === "undefined" || !selectDevice) {
+				return;
+			}
+
+			setShuffleSpotifyPlayerStatus(
+				(prev) => ({
+					...prev,
+					status: "loading",
+				}),
+			);
+
+			const fetchOptions = makeSpotifyApiFetchOptions(authState.accessToken);
+
+			const res = await fetch(
+				`${SPOTIFY_API_BASE_URL}/v1/me/player/shuffle?${
+					new URLSearchParams({
+						state: `${state}`,
+						device_id: selectDevice.id,
+					})
+				}`,
+				{
+					...fetchOptions,
+					method: "PUT",
+				},
+			);
+
+			if (res instanceof Error) {
+				setShuffleSpotifyPlayerStatus({
+					status: "failed",
+					error: new Error("Ooops"),
+				});
+				return;
+			}
+
+			setShuffleSpotifyPlayerStatus({
+				status: "success",
+				error: undefined,
+			});
+		},
+		[selectDevice, authState?.accessToken],
+	);
+
+	return [shuffleSpotifyPlayerStatus, putShuffleSpotifyPlayer] as const;
 };
