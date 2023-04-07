@@ -7,4 +7,6 @@ export const JukeBoxSideMenu: FC<PropsWithChildren> = ({ children }) => {
 
 const jukeBoxSideMenuStyle = css({
 	gridArea: "side",
+	height: "100%",
+	overflow: "auto",
 });
